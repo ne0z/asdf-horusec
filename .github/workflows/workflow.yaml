@@ -1,0 +1,33 @@
+name: Main workflow
+
+on:
+  push:
+    paths-ignore:
+      - '**.md'
+  pull_request:
+    paths-ignore:
+      - '**.md'
+  schedule:
+    - cron: "0 0 * * 5"
+
+jobs:
+  build:
+    strategy:
+      matrix:
+        os: [ubuntu-latest, macOS-latest]
+
+    runs-on: ${{ matrix.os }}
+
+    steps:
+      - name: checkout
+        uses: actions/checkout@v2
+
+      - name: install asdf-vm
+        run: git clone https://github.com/asdf-vm/asdf.git $HOME/asdf
+
+      - name: install horusec and run test
+        run: . $HOME/asdf/asdf.sh
+          asdf plugin add horusec $GITHUB_WORKSPACE
+          asdf list all horusec
+          asdf install horusec latest
+          horusec version
