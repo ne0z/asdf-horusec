@@ -7,7 +7,7 @@ set -e
 
 case "$(uname -s)" in
 	"Darwin")
-		DOWNLOAD_URL="https://github.com/ZupIT/horusec/releases/download/v${ASDF_INSTALL_VERSION}/horusec_mac_amd64"
+		DOWNLOAD_URL="https://github.com/ZupIT/horusec/releases/download/v${ASDF_INSTALL_VERSION}/horusec_mac_$(uname -m)"
 		;;
 	"Linux")
 		DOWNLOAD_URL="https://github.com/ZupIT/horusec/releases/download/v${ASDF_INSTALL_VERSION}/horusec_linux_amd64"
