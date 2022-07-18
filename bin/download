@@ -10,8 +10,14 @@ case "$(uname -s)" in
 		DOWNLOAD_URL="https://github.com/ZupIT/horusec/releases/download/v${ASDF_INSTALL_VERSION}/horusec_mac_$(uname -m)"
 		;;
 	"Linux")
-		DOWNLOAD_URL="https://github.com/ZupIT/horusec/releases/download/v${ASDF_INSTALL_VERSION}/horusec_linux_amd64"
-		;;
+		case "$(uname -m)" in
+			"x86_64")
+				DOWNLOAD_URL="https://github.com/ZupIT/horusec/releases/download/v${ASDF_INSTALL_VERSION}/horusec_linux_amd64"
+				;;
+			"x86")
+				DOWNLOAD_URL="https://github.com/ZupIT/horusec/releases/download/v${ASDF_INSTALL_VERSION}/horusec_linux_x86"
+				;;
+		esac
 esac
 
 curl -fL -o "${ASDF_DOWNLOAD_PATH}/horusec" "${DOWNLOAD_URL}"
